@@ -40,6 +40,7 @@ FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 					BullCowCount.Bulls++;	// increment bulls if they're in the same place
 				}else{
 					BullCowCount.Cows++;	//must be a cow
+
 				}
 			}
 		}
