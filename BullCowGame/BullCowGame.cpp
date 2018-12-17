@@ -38,7 +38,7 @@ int main()
 void PrintIntro() 
 {
 	// print32s int32ro of the game
-	constexpr int32 WORD_LENGTH = 5;
+	constexpr int32 WORD_LENGTH = 6;
 	std::cout << "Welcome to Bulls and Cows, a fun word game\n";
 	std::cout << "Can you guess the " << WORD_LENGTH << " letter isogram I'm thinking of?\n";
 	return;
@@ -53,9 +53,13 @@ void PlayGame()
 	// TODO change from FOR to WHILE loop once we are validating tries
 	for (int32 count = 1; count <= MaxTries; count++) {
 		// TODO make loop checking valid
-		std::cout << "Your guess was: " << GetGuess() << std::endl; 
+		FText Guess = GetGuess();
+		std::cout << "Your guess was: " << Guess << std::endl; 
 		// Submit valid guess to the game
+		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 		// print32 number of bulls and cows
+		std::cout << "Bulls = " << BullCowCount.Bulls;
+		std::cout << "Cows = " << BullCowCount.Cows << std::endl;
 	}
 }
 

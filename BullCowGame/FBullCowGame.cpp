@@ -23,14 +23,27 @@ int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 bool FBullCowGame::IsGameWon() const { return false; }
 
 // receives a valid guess, increments try and returns count 
-FBullCowCount FBullCowGame::SubmitGuess(FString)
+FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 {
 	// increment the try number
 	MyCurrentTry++;
 	// setup a return variable
 	FBullCowCount BullCowCount;
 	// loop through all letters in a guess
-		// compare letters against the hidden word 
+	int32 HiddenWordLength = MyHiddenWord.length();
+	for (int32 MHWChar = 0; MHWChar < HiddenWordLength; MHWChar++) {
+		// compare letters against the hidden word
+		for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) {
+			// if they match then
+			if (Guess[GChar] == MyHiddenWord[MHWChar]) {
+				if (MHWChar == GChar){				
+					BullCowCount.Bulls++;	// increment bulls if they're in the same place
+				}else{
+					BullCowCount.Cows++;	//must be a cow
+				}
+			}
+		}
+	}
 	return BullCowCount;
 }
 
