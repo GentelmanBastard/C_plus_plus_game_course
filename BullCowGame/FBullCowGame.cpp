@@ -1,9 +1,16 @@
 #include "pch.h"
 #include "FBullCowGame.h"
+#include <iostream>
 
 using int32 = int;
 
 FBullCowGame::FBullCowGame() { Reset(); }
+
+int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
+
+int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
+
+int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
 
 void FBullCowGame::Reset()
 {
@@ -15,10 +22,6 @@ void FBullCowGame::Reset()
 	MyHiddenWord = HIDDEN_WORD;
 	return;
 }
-
-int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
-
-int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 
 bool FBullCowGame::IsGameWon() const { return false; }
 
@@ -35,7 +38,10 @@ FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 		// compare letters against the hidden word
 		for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) {
 			// if they match then
-			if (Guess[GChar] == MyHiddenWord[MHWChar]) {
+			if (Guess[GChar] == MyHiddenWord[MHWChar])
+				// if any letter returned by running the incremented index-number lookup on the Guess word(e.g. Guess[2]) 
+				// matches any letter returned by doing the same to the Hidden word, proceed to the following conditions
+			{
 				if (MHWChar == GChar){				
 					BullCowCount.Bulls++;	// increment bulls if they're in the same place
 				}else{
