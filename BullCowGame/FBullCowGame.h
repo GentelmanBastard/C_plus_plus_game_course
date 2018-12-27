@@ -11,6 +11,16 @@ struct FBullCowCount
 	int32 Cows = 0;
 };
 
+enum class EGuessStatus
+{
+	Invalid_Status,
+	OK,
+	Not_Isogram,
+	Wrong_Length,
+	Not_Lowercase
+};
+
+
 class FBullCowGame {
 public:
 	FBullCowGame();	// constructor
@@ -20,12 +30,10 @@ public:
 	int32 GetHiddenWordLength() const;
 
 	bool IsGameWon() const;
-	bool CheckGuessValidity(FString) const;	// TODO make a more rich value
+	EGuessStatus CheckGuessValidity(FString) const;	// TODO make a more rich value
 
 	// provide a method for counting bulls and cows and incrementing try number
 	FBullCowCount SubmitGuess(FString);
-
-	bool CheckGuessValidity(std::string);
 
 	// Please try and ignore this 
 private:
