@@ -12,6 +12,8 @@ int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 
 int32 FBullCowGame::GetHiddenWordLength() const { return MyHiddenWord.length(); }
 
+bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
+
 void FBullCowGame::Reset()
 {
 	constexpr int32 MAX_TRIES = 8;
@@ -20,23 +22,22 @@ void FBullCowGame::Reset()
 
 	const FString HIDDEN_WORD = "planet";
 	MyHiddenWord = HIDDEN_WORD;
+	bGameIsWon = false;
 	return;
 }
 
-bool FBullCowGame::IsGameWon() const { return false; }
+
 
 // receives a valid guess, increments try and returns count 
-FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
+FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
-	// increment the try number
 	MyCurrentTry++;
-	// setup a return variable
 	FBullCowCount BullCowCount;
-	// loop through all letters in a guess
-	int32 HiddenWordLength = MyHiddenWord.length();
-	for (int32 MHWChar = 0; MHWChar < HiddenWordLength; MHWChar++) {
-		// compare letters against the hidden word
-		for (int32 GChar = 0; GChar < HiddenWordLength; GChar++) {
+	// loop through all letters in a hidden word
+	int32 WordLength = MyHiddenWord.length();	// assuming same length as guess
+	for (int32 MHWChar = 0; MHWChar < WordLength; MHWChar++) {
+		// compare letters against the guess word
+		for (int32 GChar = 0; GChar < WordLength; GChar++) {
 			// if they match then
 			if (Guess[GChar] == MyHiddenWord[MHWChar])
 				// if any letter returned by running the incremented index-number lookup on the Guess word(e.g. Guess[2]) 
@@ -51,6 +52,9 @@ FBullCowCount FBullCowGame::SubmitGuess(FString Guess)
 			}
 		}
 	}
+	if (BullCowCount.Bulls == WordLength){
+		bGameIsWon = true;
+	}else{ bGameIsWon = false; }
 	return BullCowCount;
 }
 
@@ -69,4 +73,6 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 
 		return EGuessStatus::OK;
 	}
-} // TODO Make actual error
+}
+
+// TODO Make actual error

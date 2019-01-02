@@ -28,12 +28,11 @@ public:
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
-
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessValidity(FString) const;	// TODO make a more rich value
 
 	// provide a method for counting bulls and cows and incrementing try number
-	FBullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitValidGuess(FString);
 
 	// Please try and ignore this 
 private:
@@ -41,4 +40,5 @@ private:
 	int32 MyMaxTries;
 	bool IsIsogram;
 	FString MyHiddenWord;
+	bool bGameIsWon;
 };
