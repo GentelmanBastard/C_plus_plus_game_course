@@ -88,10 +88,7 @@ bool FBullCowGame::IsIsogram(FString Word) const
 		} else {
 			LetterSeen[Letter] = true;
 		}
-
 	}
-	// If letter in TMap return false
-
 	return true;
 }
 
