@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "FBullCowGame.h"
 #include <iostream>
+#include <map>
+#define TMap std::map
 
 using int32 = int;
 
@@ -23,7 +25,7 @@ void FBullCowGame::Reset()
 	const FString HIDDEN_WORD = "planet";
 	MyHiddenWord = HIDDEN_WORD;
 	bGameIsWon = false;
-	return;
+//	return;
 }
 
 
@@ -60,12 +62,12 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
-	if (false)	// if the guess is not an isogram
+	if (!IsIsogram(Guess))	// if the guess is not an isogram
 	{
-		return EGuessStatus::Not_Isogram;
-	}else if (false)	// if the quess is not a lowercase
+		return EGuessStatus::Not_Isogram;	//TODO write a function
+	}else if (!IsLowercase(Guess))	// if the quess is not a lowercase
 	{
-		return EGuessStatus::Not_Lowercase;
+		return EGuessStatus::Not_Lowercase;		//TODO write a function
 	}else if (Guess.length() != GetHiddenWordLength())	// if the guess is wrong length
 	{
 		return EGuessStatus::Wrong_Length;
@@ -74,5 +76,35 @@ EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 		return EGuessStatus::OK;
 	}
 }
+
+bool FBullCowGame::IsIsogram(FString Word) const
+{
+	if(Word.length() <= 1){ return true; }
+	TMap<char, bool> LetterSeen;	// set up our map
+	for (auto Letter : Word){	// for all the letter of the word
+		Letter = tolower(Letter);
+		if (LetterSeen[Letter]){
+			return false;	// we do NOT have an isogram
+		} else {
+			LetterSeen[Letter] = true;
+		}
+
+	}
+	// If letter in TMap return false
+
+	return true;
+}
+
+bool FBullCowGame::IsLowercase(FString Word) const {
+	for (char Letter : Word){
+		char LetterLower = tolower(Letter);
+		if(LetterLower != Letter){
+			return false;
+		}
+	}
+	return true;
+}
+
+
 
 // TODO Make actual error

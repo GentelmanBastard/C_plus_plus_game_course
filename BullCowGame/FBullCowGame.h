@@ -36,9 +36,10 @@ public:
 
 	// Please try and ignore this 
 private:
+	bool IsIsogram(FString) const;
+	bool IsLowercase(FString) const;
 	int32 MyCurrentTry;
 	int32 MyMaxTries;
-	bool IsIsogram;
 	FString MyHiddenWord;
 	bool bGameIsWon;
 };
