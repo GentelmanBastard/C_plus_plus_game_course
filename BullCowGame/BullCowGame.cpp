@@ -70,7 +70,7 @@ void PlayGame()
 // loop continually until the user gives a valid guess
 FText GetValidGuess()
 {
-	FText Guess = "";
+	FText Guess;
 	EGuessStatus Status = EGuessStatus::Invalid_Status;
 	do {
 		// get a guess from the player
