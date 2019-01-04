@@ -93,9 +93,8 @@ bool FBullCowGame::IsIsogram(FString Word) const
 }
 
 bool FBullCowGame::IsLowercase(FString Word) const {
-	for (char Letter : Word){
-		char LetterLower = tolower(Letter);
-		if(LetterLower != Letter){
+	for (auto Letter : Word){
+		if(!islower(Letter)){
 			return false;
 		}
 	}
