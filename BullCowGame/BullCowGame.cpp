@@ -28,8 +28,8 @@ FBullCowGame BCGame;	// instantiate a new game
 int main()
 {	
 	bool bPlayAgain = false;
-	PrintIntro();
 	do {
+	    PrintIntro();
 		PlayGame();
 		bPlayAgain = AskToPlayAgain();
 
@@ -41,7 +41,14 @@ int main()
 void PrintIntro() 
 {
 	// prints intro of the game
-	std::cout << "\n\nWelcome to Bulls and Cows, a fun word game\n";
+	std::cout << "Welcome to Bulls and Cows, a fun word game";
+	std::cout << std::endl;
+	std::cout << "          }   {             _____           " << std::endl;
+	std::cout << "          (o o)             (o o)           " << std::endl;
+	std::cout << R"(    /------\ /               \ /-------\ )" << std::endl;
+	std::cout << R"(   / | BULL |0                0| COW |  \)" << std::endl;
+	std::cout << "  *  |-,--- |                  |-----|      " << std::endl;
+	std::cout << "     ^      ^                  ^     ^      " << std::endl;
 	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of?\n";
 //	return;
 }
@@ -75,7 +82,8 @@ FText GetValidGuess()
 	do {
 		// get a guess from the player
 		int32 CurrentTry = BCGame.GetCurrentTry();
-		std::cout << "Current Try: " << CurrentTry << ". Enter your guess: " << std::endl;
+		std::cout << "Current Try: " << CurrentTry << " of " << BCGame.GetMaxTries();
+		std::cout << ". Enter your guess: " << std::endl;
 		// std::cout << "Enter your guess: ";
 		
 		getline(std::cin, Guess);
@@ -86,13 +94,13 @@ FText GetValidGuess()
 		switch (Status)
 		{
 		case EGuessStatus::Not_Isogram:
-			std::cout << "Please enter a word without repeating letters!\n";
+			std::cout << "Please enter a word without repeating letters!\n\n";
 			break;
 		case EGuessStatus::Not_Lowercase:
-			std::cout << "Please enter a word in lowercase.\n";
+			std::cout << "Please enter a word in lowercase.\n\n";
 			break;
 		case EGuessStatus::Wrong_Length:
-			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.\n";
+			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.\n\n";
 			break;
 		default:
 			break;
