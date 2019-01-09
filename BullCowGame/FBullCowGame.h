@@ -24,12 +24,12 @@ enum class EGuessStatus
 class FBullCowGame {
 public:
 	FBullCowGame();	// constructor
-	void Reset();	// TODO make a more rich value
+	void Reset();
 	int32 GetMaxTries() const;
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
 	bool IsGameWon() const;
-	EGuessStatus CheckGuessValidity(FString) const;	// TODO make a more rich value
+	EGuessStatus CheckGuessValidity(FString) const;
 
 	// provide a method for counting bulls and cows and incrementing try number
 	FBullCowCount SubmitValidGuess(FString);
